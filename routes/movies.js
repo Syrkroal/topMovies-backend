@@ -10,7 +10,7 @@ const movieUrl = "https://api.themoviedb.org/3/movie/";
 router.all("*", cors());
 
 router.get("/", (_, res) => {
-    // res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.send("movie");
 });
 
@@ -32,6 +32,7 @@ router.get("/toprated", async (_, res) => {
 
 //get popular movies
 router.get("/popular", async (_, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
     const url =
         movieUrl +
         "popular?api_key=" +
