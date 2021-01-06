@@ -16,6 +16,12 @@ router.get("/", (_, res) => {
 
 //get top rated movies
 router.get("/toprated", async (_, res) => {
+    console.log(
+        movieUrl +
+            "top_rated?api_key=" +
+            process.env.TMDB_API_KEY +
+            "&language=en-US&page=1"
+    );
     const url =
         movieUrl +
         "top_rated?api_key=" +
