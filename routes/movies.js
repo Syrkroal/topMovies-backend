@@ -10,48 +10,49 @@ const movieUrl = "https://api.themoviedb.org/3/movie/";
 router.all("*", cors());
 
 router.get("/", (_, res) => {
-    console.log("on /movies");
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.send("movie");
 });
 
 //get top rated movies
 router.get("/toprated", async (_, res) => {
-    console.log(
-        movieUrl +
+    try {
+        const url =
+            movieUrl +
             "top_rated?api_key=" +
             process.env.TMDB_API_KEY +
-            "&language=en-US&page=1"
-    );
-    const url =
-        movieUrl +
-        "top_rated?api_key=" +
-        process.env.TMDB_API_KEY +
-        "&language=en-US&page=1";
-    const response = await axios.get(url);
+            "&language=en-US&page=1";
+        const response = await axios.get(url);
 
-    if (response.data.success == false) {
-        res.json({ message: response.status_message, error: true });
+        if (response.data.success == false) {
+            res.json({ message: response.status_message, error: true });
+        }
+
+        res.json({ movies: response.data.results });
+    } catch (err) {
+        res.json({ message: err });
     }
-
-    res.json({ movies: response.data.results });
 });
 
 //get popular movies
 router.get("/popular", async (_, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    const url =
-        movieUrl +
-        "popular?api_key=" +
-        process.env.TMDB_API_KEY +
-        "&language=en-US&page=1";
-    const response = await axios.get(url);
+    try {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        const url =
+            movieUrl +
+            "popular?api_key=" +
+            process.env.TMDB_API_KEY +
+            "&language=en-US&page=1";
+        const response = await axios.get(url);
 
-    if (response.data.success == false) {
-        res.json({ message: response.status_message, error: true });
+        if (response.data.success == false) {
+            res.json({ message: response.status_message, error: true });
+        }
+
+        res.json({ movies: response.data.results });
+    } catch (err) {
+        res.json({ message: err });
     }
-
-    res.json({ movies: response.data.results });
 });
 
 //get information about a movie
