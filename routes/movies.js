@@ -10,6 +10,7 @@ const movieUrl = "https://api.themoviedb.org/3/movie/";
 router.all("*", cors());
 
 router.get("/", (_, res) => {
+    console.log("on /movies");
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.send("movie");
 });
