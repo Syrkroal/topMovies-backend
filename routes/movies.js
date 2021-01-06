@@ -7,6 +7,7 @@ const router = express.Router();
 const movieUrl = "https://api.themoviedb.org/3/movie/";
 
 router.get("/", (_, res) => {
+    // res.setHeader("Access-Control-Allow-Origin", "*");
     res.send("movie");
 });
 
