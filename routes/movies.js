@@ -1,16 +1,12 @@
 const express = require("express");
 const axios = require("axios");
-const cors = require("cors");
 require("dotenv/config");
 
 const router = express.Router();
 
 const movieUrl = "https://api.themoviedb.org/3/movie/";
 
-router.all("*", cors());
-
 router.get("/", (_, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
     res.send("movie");
 });
 
