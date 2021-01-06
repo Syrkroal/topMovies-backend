@@ -6,6 +6,10 @@ const router = express.Router();
 
 const movieUrl = "https://api.themoviedb.org/3/movie/";
 
+router.get("/", (_, res) => {
+    res.send("movie");
+});
+
 //get top rated movies
 router.get("/toprated", async (_, res) => {
     const url =
